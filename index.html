@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Execution Hub | Milestone & Delivery Tracking</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #d4af37;
+      --bg-dark: #121212;
+      --bg-card: #1e1e1e;
+      --text-light: #f5f5f5;
+      --text-muted: #a0a0a0;
+      --error: #ff4d4d;
+      --success: #2ecc71;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Poppins', sans-serif; background-color: var(--bg-dark); color: var(--text-light); line-height: 1.6; }
+
+    nav {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.5rem 8%; background: rgba(18, 18, 18, 0.95);
+      position: sticky; top: 0; z-index: 100; border-bottom: 1px solid #2a2a2a;
+      white-space: nowrap;
+    }
+    .logo { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; color: var(--primary); }
+    .nav-links { display: flex; list-style: none; gap: 2rem; }
+    .nav-links a { color: var(--text-light); text-decoration: none; transition: color 0.3s; }
+    .nav-links a:hover { color: var(--primary); }
+    .btn-nav { background: var(--primary); color: #000; padding: 0.6rem 1.4rem; border-radius: 4px; text-decoration: none; font-weight: 600; }
+
+    .hero {
+      height: 70vh;
+      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                  url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+      display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 1rem;
+    }
+    .hero h1 { font-family: 'Playfair Display', serif; font-size: 3rem; color: var(--primary); margin-bottom: 1rem; }
+    .hero p { font-size: 1.1rem; max-width: 600px; color: var(--text-muted); margin-bottom: 2rem; }
+
+    .booking-section { padding: 4rem 8%; background: #181818; }
+    .section-title { text-align: center; margin-bottom: 2.5rem; }
+    .section-title h2 { font-family: 'Playfair Display', serif; font-size: 2.3rem; color: var(--primary); }
+
+    .booking-container {
+      max-width: 700px; margin: 0 auto; background: var(--bg-card);
+      padding: 2.5rem; border-radius: 8px; border: 1px solid #2a2a2a;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.5rem; width: 100%; }
+    .form-group.full-width { grid-column: span 2; }
+    label { font-size: 0.9rem; color: var(--text-muted); }
+    input, select {
+      width: 100%; background: #2a2a2a; border: 1px solid #3a3a3a;
+      padding: 0.8rem; border-radius: 4px; color: var(--text-light); font-family: inherit; font-size: 1rem;
+    }
+    input:focus, select:focus { outline: none; border-color: var(--primary); }
+
+    .btn-submit {
+      background: var(--primary); color: #000; border: none; padding: 1rem;
+      font-size: 1rem; font-weight: 600; border-radius: 4px; cursor: pointer; width: 100%; margin-top: 1rem;
+    }
+    .btn-submit:hover { background: #c29d2b; }
+    .btn-submit:disabled { background: #555; cursor: not-allowed; }
+
+    .response-banner { margin-top: 1.5rem; padding: 1rem; border-radius: 4px; display: none; font-size: 0.95rem; }
+    .response-banner.error { background: rgba(255, 77, 77, 0.15); border: 1px solid var(--error); color: var(--error); display: block; }
+    .response-banner.success { background: rgba(46, 204, 113, 0.15); border: 1px solid var(--success); color: var(--success); display: block; }
+
+    @media (max-width: 768px) {
+      .form-grid { grid-template-columns: 1fr; }
+      .form-group.full-width { grid-column: span 1; }
+      nav { padding: 0.8rem 4%; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo">Execution Hub</div>
+    <ul class="nav-links">
+      <li><a href="#pipeline">Project Tracker</a></li>
+    </ul>
+    <a href="#pipeline" class="btn-nav">Launch Project</a>
+  </nav>
+
+  <header class="hero">
+    <h1>Milestone-Driven Development</h1>
+    <p>Trigger your custom 8-stage project delivery lifecycle, automated research planning, and live status logging.</p>
+  </header>
+
+  <section class="booking-section" id="pipeline">
+    <div class="section-title">
+      <h2>Initialize Delivery Pipeline</h2>
+      <p style="color: var(--text-muted);">Submit project specifications to kick off multi-stage automated tracking</p>
+    </div>
+
+    <div class="booking-container">
+      <form id="projectForm">
+        <div class="form-grid">
+          <div class="form-group full-width">
+            <label for="clientName">Client Name</label>
+            <input type="text" id="clientName" placeholder="Enter Full Name" required>
+          </div>
+
+          <div class="form-group full-width">
+            <label for="clientEmail">Client Email Address</label>
+            <input type="email" id="clientEmail" placeholder="Enter Email Address" required>
+          </div>
+
+          <div class="form-group full-width">
+            <label for="projectName">Project Scope / Title</label>
+            <input type="text" id="projectName" placeholder="e.g. E-commerce Website" required>
+          </div>
+        </div>
+
+        <button type="submit" id="submitBtn" class="btn-submit">Trigger Project Workflow</button>
+      </form>
+
+      <div id="responseBanner" class="response-banner"></div>
+    </div>
+  </section>
+
+  <script>
+    const N8N_WEBHOOK_URL = "https://underrate-ranting-unbutton.ngrok-free.dev/webhook/start-project-pipeline";
+
+    const form = document.getElementById("projectForm");
+    const responseBanner = document.getElementById("responseBanner");
+    const submitBtn = document.getElementById("submitBtn");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      submitBtn.disabled = true;
+      submitBtn.innerText = "Initializing Pipeline...";
+
+      const payload = {
+        clientName: document.getElementById("clientName").value,
+        clientEmail: document.getElementById("clientEmail").value,
+        projectName: document.getElementById("projectName").value
+      };
+
+      try {
+        const res = await fetch(N8N_WEBHOOK_URL, {
+          method: "POST",
+          headers: { 
+            "Content-Type": "application/json", 
+            "ngrok-skip-browser-warning": "true" 
+          },
+          body: JSON.stringify(payload)
+        });
+        
+        const data = await res.json();
+
+        if (data.success) {
+          showBanner("🎉 Project execution pipeline successfully started! Milestone updates are logging.", "success");
+          form.reset();
+        } else {
+          showBanner("Failed to initialize project workflow.", "error");
+        }
+      } catch (err) {
+        showBanner("Network error connecting to webhook automation server.", "error");
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerText = "Trigger Project Workflow";
+      }
+    });
+
+    function showBanner(msg, type) {
+      responseBanner.innerText = msg;
+      responseBanner.className = `response-banner ${type}`;
+    }
+  </script>
+</body>
+</html>
